@@ -3,7 +3,6 @@
     import InputText from 'primevue/inputtext';
     import Textarea from 'primevue/textarea';
     import Chips from 'primevue/chips';
-    import Button from 'primevue/button';
     import { useInformationStore } from '../stores/information';
 
     const store = useInformationStore();
@@ -53,9 +52,6 @@
                         <div class="field px-2 mb-2">
                             <label for="skills">Skills</label>
                             <Chips v-model="store.skills" separator=","  />
-                        </div>
-                        <div class="field px-2 mb-2 mt-4">
-                            <Button label="Save" @click="saveInfo"></Button>
                         </div>
                     </div>
             </template>

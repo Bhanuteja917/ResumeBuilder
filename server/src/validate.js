@@ -1,10 +1,14 @@
+const validator = require('validator')
+
 const validateJson = (req) => {
   try {
     const result = validatePersonalInformation(req.personal_information) &&
     validateSkills(req.skills) &&
     validateWorkExperience(req.experience) &&
     validateEducation(req.education) &&
-    validateAchievements(req.achievements)
+    validateAchievements(req.achievements) &&
+    validator.isAlphanumeric(req.job_title) &&
+    validator.isAlphanumeric(req.career_objective)
     if (!result) {
       return false
     }
@@ -15,7 +19,6 @@ const validateJson = (req) => {
   }
 }
 
-const validator = require('validator')
 const validatePersonalInformation = (req) => {
   try {
     const name = validator.isAlpha(req.name)
@@ -24,11 +27,11 @@ const validatePersonalInformation = (req) => {
     const phoneNumber = validator.isMobilePhone(req.phone_number)
     const url = validator.isURL(req.linkedin_url)
     if (!name || !lastName || !emailAddress || !phoneNumber || !url) {
-      return 'personal_information'
+      return false
     }
     return true
   } catch (err) {
-    return 'Error validating personal information'
+    return false
   }
 }
 
@@ -37,30 +40,36 @@ const validateSkills = (skills) => {
     for (const skill of skills) {
       const value = validator.isAlphanumeric(skill)
       if (!value) {
-        return 'skills'
+        return false
       }
     }
     return true
   } catch (err) {
-    return 'Error validating skills'
+    return false
   }
 }
 
 const validateWorkExperience = (workExperience) => {
   try {
     for (const experience of workExperience) {
-      const name = validator.isAlphanumeric(experience.company_name)
+      const name = validator.isAlpha(experience.company_name)
+      console.log(name)
+      console.log(validator.isAlphanumeric('ABC Inc'))
       const year = experience.passing_year.split('-')
+      console.log(year)
       const year1 = validator.isNumeric(year[0])
+      console.log(year1)
       const year2 = validator.isNumeric(year[1])
-      const responsibilities = validator.isAlphanumeric(experience.responsibilities)
+      console.log(year2)
+      const responsibilities = validator.isAlpha(experience.responsibilities)
+      console.log(responsibilities)
       if (!name || !year1 || !year2 || !responsibilities) {
-        return 'work_experience'
+        return false
       }
     }
     return true
   } catch (err) {
-    return 'Error validating work experience'
+    return false
   }
 }
 
@@ -73,12 +82,12 @@ const validateEducation = (education) => {
       const year2 = validator.isNumeric(year[1])
       const description = validator.isAlphanumeric(school.description)
       if (!name || !year1 || !year2 || !description) {
-        return 'education'
+        return false
       }
     }
     return true
   } catch (err) {
-    return 'Error validating education'
+    return false
   }
 }
 
@@ -88,13 +97,18 @@ const validateAchievements = (achievements) => {
       const field = validator.isAlphanumeric(achievement.field)
       const awards = validator.isAlphanumeric(achievement.awards)
       if (!field || !awards) {
-        return 'achievements'
+        return false
       }
     }
     return true
   } catch (err) {
-    return 'Error validating achievements'
+    return false
   }
 }
 
 exports.validateJson = validateJson
+exports.validatePersonalInformation = validatePersonalInformation
+exports.validateSkills = validateSkills
+exports.validateWorkExperience = validateWorkExperience
+exports.validateEducation = validateEducation
+exports.validateAchievements = validateAchievements

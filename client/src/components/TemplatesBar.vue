@@ -28,7 +28,7 @@ onMounted(() => {
         <h3 class="px-2 font-bold">Templates</h3>
       </template>
       <template v-slot:subtitle>
-        <p class="px-2">Select a template and scroll down to submit and generate your resume</p>
+        <p class="px-2">Select a template and scroll down to submit and download your resume</p>
       </template>
       <template v-slot:content>
         <div class="card flex flex-column md:align-items-center m-0 p-0">

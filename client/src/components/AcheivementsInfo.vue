@@ -4,18 +4,33 @@
     import Divider from 'primevue/divider';
     import Button from 'primevue/button';
 
-    import { ref } from 'vue';
+    import { provide, ref } from 'vue';
     import { useInformationStore } from '../stores/information';
 
     const componentList = ref([AcheivementsComponent])
     const store = useInformationStore();
 
-    const saveInfo = () => {
-        store.toggleSaveAch()
-        // setTimeout(() => {
-        //     store.saveAch = false;
-        // }, 5000);
+    const save = ref(false);
+    provide('save', save);
+    
+    const saveData = () => {
+        store.achievements = [];
+        save.value = true;
+        setTimeout(() => {
+            save.value = false;
+        }, 4000);
     }
+
+    const addComponent = () => {
+        componentList.value.push(AcheivementsComponent);
+        saveData();
+    }
+
+    const removeComponent = () => {
+        componentList.value.pop();
+        saveData();
+    }
+
 </script>
 
 <template>
@@ -34,14 +49,14 @@
                 </template>
                 
                 <div class="field px-2 mb-1 mt-2">
-                    <Button label="Save" @click="saveInfo"></Button>
+                    <Button label="Save" @click="saveData()"></Button>
                 </div>
                 <div class="flex flex-column md:flex-row my-4">
                     <div class="col-12 md:col-6 mb-2 py-0">
-                        <Button label="Add" @click="componentList.push(AcheivementsComponent)"/>
+                        <Button label="Add" @click="addComponent()"/>
                     </div>
                     <div class="col-12 md:col-6 mb-2 py-0">
-                        <Button label="Remove" severity="danger" @click="componentList.pop()"/>
+                        <Button label="Remove" severity="danger" @click="removeComponent()"/>
                     </div>
                 </div>
             </template>

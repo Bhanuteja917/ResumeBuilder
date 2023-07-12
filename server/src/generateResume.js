@@ -9,7 +9,7 @@ function generateResume (data, callback) {
     // If our output already exists, remove it so we can run the application again.
     if (fs.existsSync(OUTPUT)) fs.unlinkSync(OUTPUT)
 
-    const INPUT = `./templates/${data.template_id}.docx`
+    const INPUT = path.resolve(`./templates/${data.template_id}.docx`)
     const JSON_INPUT = data
 
     const credentials = PDFServicesSdk.Credentials

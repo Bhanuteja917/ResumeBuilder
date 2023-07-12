@@ -18,14 +18,6 @@ export const useInformationStore = defineStore('information', () => {
     const saveExp = ref(false)
     const saveAch = ref(false)
 
-    const toggleSaveAch = () => {
-        saveAch.value = true
-        // setTimeout(() => {  
-        //     saveAch.value = false
-        // }, 2000)
-    }
-
-
     return { template, 
              firstName, 
              lastName, 
@@ -40,6 +32,6 @@ export const useInformationStore = defineStore('information', () => {
              achievements,
              saveEdu,
              saveExp,
-             saveAch,
-             toggleSaveAch}
+             saveAch
+            }
 })
