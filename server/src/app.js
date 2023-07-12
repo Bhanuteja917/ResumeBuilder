@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const { generateResume } = require('./generateResume')
-// const { validateJson } = require('./validate')
+const { validateJson } = require('./validate')
 
 const app = express()
 app.use(morgan('combined'))
@@ -11,15 +11,15 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.post('/generate', (req, res) => {
-  // if (!validateJson(req.body)) {
-  //   res.status(400).send(
-  //     {
-  //       name: 'Bad Request',
-  //       message: 'Invalid JSON'
-  //     }
-  //   )
-  //   return
-  // }
+  if (!validateJson(req.body)) {
+    res.status(400).send(
+      {
+        name: 'Bad Request',
+        message: 'Invalid JSON'
+      }
+    )
+    return
+  }
   if (!(req.body.template_id === '1' || req.body.template_id === '2' || req.body.template_id === '3')) {
     res.status(404).send(
       {

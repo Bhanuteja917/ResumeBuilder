@@ -15,7 +15,7 @@
         if (save.value || saveInfo.value) {
             store.achievements.push({
                 field: field.value,
-                award: award.value
+                awards: award.value
             });
         }
     });
