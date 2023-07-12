@@ -4,7 +4,7 @@
       "name": "Lorem",
       "last_name": "ipsum",
       "email_address": "ipsum@adobe.com",
-      "phone_number": "+91 99xx14xx99",
+      "phone_number": "+91 9900140099",
       "linkedin_url": "https://www.linkedin.com"
     },
     "job_title": "Software Development Engineer",
@@ -18,19 +18,19 @@
     "education": [
       {
         "school_name": "School",
-        "passing_year": "201X-201Y",
+        "passing_year": "2010-2015",
         "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\\'t look even slightly believable."
       },
       {
         "school_name": "College",
-        "passing_year": "203X-203Y",
+        "passing_year": "2030-2032",
         "description": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc"
       }
     ],
     "experience": [
       {
         "company_name": "Adobe",
-        "passing_year": "201X-201Y",
+        "passing_year": "2011-2012",
         "responsibilities": "It is a long established fact that a reader will be distracted by the readable content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod"
       }
     ],

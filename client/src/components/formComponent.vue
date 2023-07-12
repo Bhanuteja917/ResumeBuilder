@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="form flex flex-column gap-3">
+  <div class="form flex flex-column gap-3 mb-3">
     <BasicInfo></BasicInfo>
     <ResumeForm 
       title="Education" 

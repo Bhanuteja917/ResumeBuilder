@@ -1,5 +1,22 @@
 <script setup>
     import InputText from 'primevue/inputtext';
+    import { ref, watch } from 'vue';
+    import { useInformationStore } from '../stores/information';
+
+    const field = ref('');
+    const award = ref('');
+
+    const store = useInformationStore();
+
+    watch(store.saveAch, () => {
+        if (store.saveAch) {
+            store.acheivements.push({
+                field: field.value,
+                award: award.value
+            });
+        }
+    });
+
 </script>
 
 <template>

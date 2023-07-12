@@ -28,7 +28,7 @@
     position: fixed;
     height: 100%;
     width: 60px;
-    background: #11101d;
+    background: var(--primary-700);
     transition: all 0.5s ease;
     z-index: 999;
 }
@@ -65,16 +65,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #11101d;
+    border-bottom: 1px solid var(--primary-700);
 }
 .iconButton {
-    background-color: #11101d;
+    background-color: var(--primary-700);
     border: none;
     outline: none;
     cursor: pointer;
     transition: all 0.5s ease;
 }
 .iconButton:hover {
-    background-color: #1a1a2e;
+    background-color: var(--primary-600);
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px var(--primary-600);
 }
 </style>

@@ -5,8 +5,17 @@
     import Button from 'primevue/button';
 
     import { ref } from 'vue';
+    import { useInformationStore } from '../stores/information';
 
     const componentList = ref([AcheivementsComponent])
+    const store = useInformationStore();
+
+    const saveInfo = () => {
+        store.toggleSaveAch()
+        // setTimeout(() => {
+        //     store.saveAch = false;
+        // }, 5000);
+    }
 </script>
 
 <template>
@@ -20,10 +29,13 @@
             </template>
             <template v-slot:content>
                 <template v-for="(component, index) in componentList" :key=index>
-                    <component :is="component"/>
+                    <component :is="component" :saveData="saveData"/>
                     <Divider v-if="index !== componentList.length - 1" />
                 </template>
-
+                
+                <div class="field px-2 mb-1 mt-2">
+                    <Button label="Save" @click="saveInfo"></Button>
+                </div>
                 <div class="flex flex-column md:flex-row my-4">
                     <div class="col-12 md:col-6 mb-2 py-0">
                         <Button label="Add" @click="componentList.push(AcheivementsComponent)"/>
@@ -36,3 +48,6 @@
         </Card>
     </div>
 </template>
+
+<style scoped>
+</style>

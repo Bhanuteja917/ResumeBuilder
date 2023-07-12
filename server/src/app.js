@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const { generateResume } = require('./generateResume')
+const { validateJson } = require('./validate')
 
 const app = express()
 app.use(morgan('combined'))
@@ -10,16 +11,46 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.post('/generate', (req, res) => {
-  if (!(req.body.template_id === '1' || req.body.template_id === '2' || req.body.template_id === '3')) {
-    res.status(404).send('Template not found')
+  if (!validateJson(req.body)) {
+    res.status(400).send(
+      {
+        name: 'Bad Request',
+        message: 'Invalid JSON'
+      }
+    )
     return
   }
-  generateResume(req.body, (filePath, error) => {
-    if (error) {
-      console.error('Error generating resume:', error)
-      res.status(500).send('Error generating resume')
+  if (!(req.body.template_id === '1' || req.body.template_id === '2' || req.body.template_id === '3')) {
+    res.status(404).send(
+      {
+        name: 'Template not found',
+        message: 'Please select another template'
+      }
+    )
+    return
+  }
+  generateResume(req.body, (filePath, err) => {
+    if (err) {
+      if (err?.message === 'client_id must not be blank; client_secret must not be blank' ||
+          err?.message === 'client_id must not be blank' ||
+          err?.message === 'client_secret must not be blank' ||
+          err?.message === 'invalid client_secret parameter' ||
+          err?.message === 'invalid client_id parameter') {
+        res.status(401).send(
+          {
+            name: 'Unauthorized',
+            message: err?.message
+          }
+        )
+        return
+      }
+      res.status(500).send(
+        {
+          name: 'Internal Server Error',
+          message: err?.message
+        })
     } else {
-      setTimeout(() => { res.sendFile(filePath) }, 15000)
+      setTimeout(() => { res.sendFile(filePath) }, 1000)
     }
   })
 })

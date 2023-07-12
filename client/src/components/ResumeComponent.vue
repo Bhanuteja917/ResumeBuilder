@@ -7,6 +7,8 @@
         name: String,
         text: String
     });
+
+    
 </script>
 
 <template>
