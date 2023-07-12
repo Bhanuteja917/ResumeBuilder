@@ -68,6 +68,14 @@ npm start
 npm test
 ```
 
+## Making a request to the server from command line
+1. Run the following command from server directory. Set the environment variables before running the below command
+2. File must have a .pdf extension
+```Shell
+# change the directory to server
+curl -X POST -d "@example.json" -H "Content-Type: application/json" http://localhost:8081/generate --output <FILE>
+```
+
 ### Note
 
 1. When using the user interface it usually takes 10 to 15 seconds to download the file.
